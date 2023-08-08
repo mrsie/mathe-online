@@ -13,41 +13,21 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="mb-4">Simple Multiplication Tasks</h1>
-        
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="num1">Number 1:</label>
-                    <input type="number" class="form-control" id="num1" readonly>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="num2">Number 2:</label>
-                    <input type="number" class="form-control" id="num2" readonly>
-                </div>
-            </div>
-        </div>
-        
-        <button class="btn btn-primary" id="generate">Generate Task</button>
-        
+        <h1 class="mb-4">Kleines Einmaleins</h1>
+
+        <button class="btn btn-primary" id="generate">Neue Aufgabe</button> <button class="btn btn-secondary" id="showAnswer">Antwort Anzeigen</button>
+
         <div class="mt-4">
-            <h2>Task:</h2>
-            <p id="task"></p>
-            <button class="btn btn-secondary" id="showAnswer">Show Answer</button>
-            <p id="answer" style="display: none;"><strong>Answer:</strong> <span id="result"></span></p>
-        </div>
+            <h2 id="task"><span id="num1"></span> x <span id="num2"></span> = <span id="result"></span></h2>
+        </div>   
     </div>
 
     <script>
         const generateButton = document.getElementById("generate");
         const showAnswerButton = document.getElementById("showAnswer");
-        const num1Input = document.getElementById("num1");
-        const num2Input = document.getElementById("num2");
-        const taskElement = document.getElementById("task");
+        const num1Span = document.getElementById("num1");
+        const num2Span = document.getElementById("num2");
         const resultElement = document.getElementById("result");
-        const answerElement = document.getElementById("answer");
 
         generateButton.addEventListener("click", generateTask);
         showAnswerButton.addEventListener("click", showAnswer);
@@ -56,16 +36,13 @@
             const num1 = Math.floor(Math.random() * 10) + 1; // Generate a random number between 1 and 10
             const num2 = Math.floor(Math.random() * 10) + 1;
             
-            num1Input.value = num1;
-            num2Input.value = num2;
-            
-            taskElement.textContent = `${num1} x ${num2} = `;
-            resultElement.textContent = num1 * num2;
-            answerElement.style.display = "none";
+            num1Span.textContent = num1;
+            num2Span.textContent = num2;
+            resultElement.textContent = "";
         }
 
         function showAnswer() {
-            answerElement.style.display = "block";
+            resultElement.textContent = num1Span.textContent * num2Span.textContent;
         }
     </script>
 </body>
