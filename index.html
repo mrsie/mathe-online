@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Tasks</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Simple Multiplication Tasks</h1>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="num1">Number 1:</label>
+                    <input type="number" class="form-control" id="num1" placeholder="Enter number 1">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="num2">Number 2:</label>
+                    <input type="number" class="form-control" id="num2" placeholder="Enter number 2">
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" id="generate">Generate Task</button>
+        
+        <div class="mt-4">
+            <h2>Task:</h2>
+            <p id="task"></p>
+            <button class="btn btn-secondary" id="showAnswer">Show Answer</button>
+            <p id="answer" style="display: none;"><strong>Answer:</strong> <span id="result"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const generateButton = document.getElementById("generate");
+        const showAnswerButton = document.getElementById("showAnswer");
+        const num1Input = document.getElementById("num1");
+        const num2Input = document.getElementById("num2");
+        const taskElement = document.getElementById("task");
+        const resultElement = document.getElementById("result");
+        const answerElement = document.getElementById("answer");
+
+        generateButton.addEventListener("click", generateTask);
+        showAnswerButton.addEventListener("click", showAnswer);
+
+        function generateTask() {
+            const num1 = parseInt(num1Input.value);
+            const num2 = parseInt(num2Input.value);
+            
+            if (!isNaN(num1) && !isNaN(num2)) {
+                taskElement.textContent = `${num1} x ${num2} = `;
+                resultElement.textContent = num1 * num2;
+                answerElement.style.display = "none";
+            }
+        }
+
+        function showAnswer() {
+            answerElement.style.display = "block";
+        }
+    </script>
+</body>
+</html>
