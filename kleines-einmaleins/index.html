@@ -68,12 +68,8 @@
         function handleKeyPress(event) {
             // Check if the pressed key is "space" (keycode 32) and there's no active input element
             if (event.keyCode === 32 & KeyPressed == false) {
-                if (n && document.activeElement.tagName !== "INPUT") {
-                    generateTask();
-                    n=false;
-                } else {
-                    showAnswer();
-                    n=true;
+                if (document.activeElement.tagName !== "INPUT") {
+                    next();
                 }
                 KeyPressed == true;
             }
