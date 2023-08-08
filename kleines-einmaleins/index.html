@@ -23,24 +23,34 @@
 
     <footer class="mt-auto d-flex justify-content-end">
         <div class="button-container">
-            <button class="btn btn-primary" id="generate">Neue Aufgabe</button>
-            <button class="btn btn-secondary" id="showAnswer">Antwort Anzeigen</button>
+            <button class="btn btn-primary" id="next">Neue Aufgabe</button>
         </div>
     </footer>
 
     <script>
         let n = true;
         let KeyPressed = false;
-        const generateButton = document.getElementById("generate");
-        const showAnswerButton = document.getElementById("showAnswer");
+        const nextButton = document.getElementById("next")
         const num1Span = document.getElementById("num1");
         const num2Span = document.getElementById("num2");
         const resultElement = document.getElementById("result");
 
-        generateButton.addEventListener("click", generateTask);
-        showAnswerButton.addEventListener("click", showAnswer);
+        nextButton.addEventListener("click", next);
         document.addEventListener("keydown", handleKeyPress);
         document.addEventListener("keyup", handleKeyUp);
+
+        function next () {
+            if (n) {
+                generateTask();
+                n=false;
+                nextButton.textContent = "Antwort anzeigen";
+            } else{
+                showAnswer();
+                n=true;
+                nextButton.textContent = "Neue Aufgabe"
+            }
+
+        }
 
         function generateTask() {
             const num1 = Math.floor(Math.random() * 10) + 1; // Generate a random number between 1 and 10
@@ -59,8 +69,8 @@
             // Check if the pressed key is "space" (keycode 32) and there's no active input element
             if (event.keyCode === 32 & KeyPressed == false) {
                 if (n && document.activeElement.tagName !== "INPUT") {
-                generateTask();
-                n=false;
+                    generateTask();
+                    n=false;
                 } else {
                     showAnswer();
                     n=true;
