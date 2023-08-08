@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multiplication Tasks</title>
+    <title>Kleines Einmaleins</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -11,18 +11,26 @@
         }
     </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <div class="container">
-        <h1 class="mb-4">Kleines Einmaleins</h1>
-
-        <button class="btn btn-primary" id="generate">Neue Aufgabe</button> <button class="btn btn-secondary" id="showAnswer">Antwort Anzeigen</button>
+        <h1 class="mb-4" style="font-size:5vw">Kleines Einmaleins</h1>
 
         <div class="mt-4">
-            <h2 id="task"><span id="num1"></span> x <span id="num2"></span> = <span id="result"></span></h2>
-        </div>   
+            <h2  id="task" style="font-size:10vw; text-align:center"><span id="num1"></span> x <span id="num2"></span> = </h2>
+            <h2 class="text-success" style="font-size:10vw; text-align:center"><span id="result"></span></h2>
+        </div>
     </div>
 
+    <footer class="mt-auto d-flex justify-content-end">
+        <div class="button-container">
+            <button class="btn btn-primary" id="generate">Neue Aufgabe</button>
+            <button class="btn btn-secondary" id="showAnswer">Antwort Anzeigen</button>
+        </div>
+    </footer>
+
     <script>
+        let n = true;
+        let KeyPressed = false;
         const generateButton = document.getElementById("generate");
         const showAnswerButton = document.getElementById("showAnswer");
         const num1Span = document.getElementById("num1");
@@ -31,6 +39,8 @@
 
         generateButton.addEventListener("click", generateTask);
         showAnswerButton.addEventListener("click", showAnswer);
+        document.addEventListener("keydown", handleKeyPress);
+        document.addEventListener("keyup", handleKeyUp);
 
         function generateTask() {
             const num1 = Math.floor(Math.random() * 10) + 1; // Generate a random number between 1 and 10
@@ -44,6 +54,27 @@
         function showAnswer() {
             resultElement.textContent = num1Span.textContent * num2Span.textContent;
         }
+
+        function handleKeyPress(event) {
+            // Check if the pressed key is "space" (keycode 32) and there's no active input element
+            if (event.keyCode === 32 & KeyPressed == false) {
+                if (n && document.activeElement.tagName !== "INPUT") {
+                generateTask();
+                n=false;
+                } else {
+                    showAnswer();
+                    n=true;
+                }
+                KeyPressed == true;
+            }
+
+        }
+        function handleKeyUp(event) {
+            if (event.keyCode == 32) {
+                KeyPressed = false;
+            }
+        }
+
     </script>
 </body>
 </html>
